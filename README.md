@@ -7,5 +7,5 @@
 * `사용방법` 
 * `pip install -r requirements.txt) `
 * `python manage.py runserver `
-* `127.0.0.1/sitemap (주소 확인)`
+* `127.0.0.1:8000/sitemap (주소 확인)`
 
