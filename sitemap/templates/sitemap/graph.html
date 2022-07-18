@@ -1,0 +1,71 @@
+{% extends 'sitemap/base.html' %}
+{% load static %}
+{% block content %}
+{% comment %} 반복문 연습 {% endcomment %}
+ 
+<h1 class="mt-5 pt-4 px-5" style="color: rgb(0, 158, 221);"><b>서울시 상권 분석</b></h1>
+<div class="row pt-1 px-5">
+    <div class="col-md-4" style="background: rgb(138, 155, 206);">
+        <!-- <h3 class="py-3" style=" color: black;" ><b>구</b></h3> -->
+            
+                <form ><label class="py-3" style="color: black",font-size="20px"><strong>구선택:</strong>
+                {% csrf_token %}
+                <select id="gugu" onchange="change_img()">
+                {% for key,value in my_dic.items %}
+                <option value={{value}}>{{key}}</option>
+                {%endfor%}
+                </select>
+                </label></form>
+            </h3>
+            <br>
+            <head><h3 style="color: black;"><strong>업종별 평균매출 Top</strong></h3></head>
+                <br><br><br>
+                <iframe id="paragra" src="\static\para_html\11680.0.html"></iframe>
+
+                {% comment %} 파이썬 데이터 프레임 갈무리 한 것을 html로 변환한 것 {% endcomment %}
+           
+        </div>
+        <div class="col-md-4" style="background: rgb(158, 217, 240);">
+            <h3 class="py-3" style=" color: black;"><b>Graph</b></h3>
+            <br>
+            
+                <head><h3 style="color: black;"><strong>구별 매출변화</strong></h3></head>
+                <br><br><br>
+                <img id="imi" style="border:2px  ridge wheat" src= "\static\gra_png\11680.0.png" alt = "." width="450px" height="450px" >
+            
+
+        </div>
+        <div class="col-md-4" style="background: steelblue;">
+            <h3 class="py-3" style=" color: black;"><b>Graph</b></h3>
+            <br>
+            
+                <head><h3 style="color: black;"><strong>구별 평균매출 Top5</strong></h3></head>
+                <br><br><br>
+                <img id="imim" style="border:2px  ridge wheat" src= "\static\para_png\[11680.0].png" alt = "." width="450px" height="450px" >
+           
+                            
+        </div>
+        <a class="btn btn-primary" href="{% url 'sitemap:index' %}#portfolio" role="button" align="center">돌아가기 </a>
+
+    </div>
+    
+
+    <script>
+        function change_img() {
+            let sel =document.querySelector("#gugu")
+            let img =document.querySelector("#imim")
+            let ima =document.querySelector("#imi")
+            let para_html=document.querySelector("#paragra")
+            img.src = "/static/para_png/["+sel.options[sel.selectedIndex].value+"].png"
+            ima.src = "/static/gra_png/" +sel.options[sel.selectedIndex].value +".png"
+            para_html.src="/static/para_html/"+sel.options[sel.selectedIndex].value +".html"
+        }
+
+
+    </script>
+     
+{% endblock %}        
+                
+                
+            
+   

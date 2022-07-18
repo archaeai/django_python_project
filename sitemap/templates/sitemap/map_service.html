@@ -1,0 +1,74 @@
+{% extends 'sitemap/base.html' %}
+
+{% block content %}
+<div class="container mt-5 pt-3">
+    <div class="row">
+        <div class="col-md-9">
+            <h3 class="text-cemter" align="center"><b>서울 상권 {{service_name}}</b></h3>
+            {{m | safe}}
+            <form name="service_button" class="form" method="post" align="right">
+                {% csrf_token %}
+                <select name="service" id="cbx">
+                    <option value="" disabled selected>===업종===</option>
+                    <option value="분식전문점">분식전문점</option>
+                    <option value="한식음식점">한식음식점</option>
+                    <option value="중식음식점">중식음식점</option>
+                    <option value="일식음식점">일식음식점</option>
+                    <option value="양식음식점">양식음식점</option>
+                    <option value="치킨전문점" >치킨전문점</option>
+                    <option value="패스트푸드점">패스트푸드점</option>
+                    <option value="커피-음료">커피-음료</option>
+                    <option value="제과점">제과점</option>
+                    <option value="호프-간이주점">호프-간이주점</option>
+                </select>
+                {% comment %} <select name="gu" id="cbx">
+                    <option value="" disabled>==구==</option>
+                    <option value="강남구" selected>강남구</option>
+                    <option value="강동구">강동구</option>
+                    <option value="강북구">강북구</option>
+                    <option value="강서구">강서구</option>
+                    <option value="관악구">관악구</option>
+                    <option value="광진구">광진구</option>
+                    <option value="구로구">구로구</option>
+                    <option value="금천구">금천구</option>
+                    <option value="노원구">노원구</option>
+                    <option value="도봉구">도봉구</option>
+                    <option value="동대문구">동대문구</option>
+                    <option value="동작구">동작구</option>
+                    <option value="마포구">마포구</option>
+                    <option value="서대문구">서대문구</option>
+                    <option value="서초구">서초구</option>
+                    <option value="성동구">성동구</option>
+                    <option value="성북구">성북구</option>
+                    <option value="송파구">송파구</option>
+                    <option value="양천구">양천구</option>
+                    <option value="영등포구">영등포구</option>
+                    <option value="용산구">용산구</option>
+                    <option value="은평구">은평구</option>
+                    <option value="종로구">종로구</option>
+                    <option value="중구">중구</option>
+                    <option value="중랑구">중랑구</option>
+                </select> {% endcomment %}
+                <input id="button" type="submit" value="업종 선택" onclick="go_to_service(service_button)">
+                <input id="button" type="submit" value="구 단위로 보기" onclick="go_to_gu(service_button)">
+                <a  id="button" href="{% url 'sitemap:index' %}#portfolio" role="button" align="center">돌아가기 </a>
+            </form>
+        </div>
+        
+    </div>
+</div>
+
+<div class="container mt-5">
+   
+</div>
+<script>
+    function go_to_service(obj){
+        obj.action = "{% url 'sitemap:map_service' %}"
+        obj.submit();
+    }
+    function go_to_gu(obj){
+        obj.action = "{% url 'sitemap:map_gu' %}"
+        obj.submit();
+    }
+</script>
+{% endblock %}
